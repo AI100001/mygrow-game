@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyGrow Games</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #ddd;
+            padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+        }
+
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 20px 0;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #2c5aa0;
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 10px;
+            font-size: 12px;
+        }
+
+        .language-selector a {
+            color: #999;
+            text-decoration: none;
+        }
+
+        .language-selector a.active {
+            color: #2c5aa0;
+            font-weight: bold;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Categories */
+        .categories {
+            margin-bottom: 30px;
+        }
+
+        .category-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .category-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .category-tag {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 13px;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .category-tag:hover,
+        .category-tag.active {
+            background: #2c5aa0;
+            color: white;
+            border-color: #2c5aa0;
+        }
+
+        .view-more {
+            color: #2c5aa0;
+            text-decoration: none;
+            font-size: 14px;
+            float: right;
+            margin-top: -30px;
+        }
+
+        .view-more:hover {
+            text-decoration: underline;
+        }
+
+        /* Games Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .game-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .game-image {
+            width: 100%;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .game-info {
+            padding: 12px;
+        }
+
+        .game-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .game-category {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+        .game-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .game-tag {
+            background: #f0f0f0;
+            color: #666;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+        }
+
+        /* Game color themes */
+        .game-2048 { background: linear-gradient(135deg, #4CAF50, #66BB6A); }
+        .game-tetris { background: linear-gradient(135deg, #FF9800, #FFB74D); }
+        .game-snake { background: linear-gradient(135deg, #8BC34A, #AED581); }
+        .game-pacman { background: linear-gradient(135deg, #FFEB3B, #FFF176); color: #333 !important; }
+        .game-chess { background: linear-gradient(135deg, #795548, #A1887F); }
+        .game-sudoku { background: linear-gradient(135deg, #3F51B5, #7986CB); }
+        .game-solitaire { background: linear-gradient(135deg, #E91E63, #F06292); }
+        .game-minesweeper { background: linear-gradient(135deg, #607D8B, #90A4AE); }
+        .game-frogger { background: linear-gradient(135deg, #4CAF50, #8BC34A); }
+        .game-breakout { background: linear-gradient(135deg, #FF5722, #FF8A65); }
+        .game-tictactoe { background: linear-gradient(135deg, #9C27B0, #BA68C8); }
+        .game-flappy { background: linear-gradient(135deg, #00BCD4, #4DD0E1); }
+        .game-checkers { background: linear-gradient(135deg, #424242, #757575); }
+        .game-crossword { background: linear-gradient(135deg, #FFC107, #FFD54F); color: #333 !important; }
+        .game-mahjong { background: linear-gradient(135deg, #D32F2F, #F44336); }
+        .game-bubble { background: linear-gradient(135deg, #E91E63, #EC407A); }
+        .game-wordle { background: linear-gradient(135deg, #689F38, #8BC34A); }
+        .game-spider { background: linear-gradient(135deg, #5D4037, #8D6E63); }
+        .game-candy { background: linear-gradient(135deg, #E91E63, #F06292); }
+        .game-jewel { background: linear-gradient(135deg, #9C27B0, #AB47BC); }
+        .game-pool { background: linear-gradient(135deg, #2E7D32, #4CAF50); }
+        .game-poker { background: linear-gradient(135deg, #1976D2, #42A5F5); }
+        .game-backgammon { background: linear-gradient(135deg, #8D6E63, #A1887F); }
+        .game-pinball { background: linear-gradient(135deg, #FF6F00, #FF8F00); }
+
+        /* Sections */
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid #ddd;
+            margin-top: 60px;
+            padding: 30px 0;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .language-selector {
+                display: none;
+            }
+            
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 10px;
+            }
+        }
+
+        /* Game Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: 5% auto;
+            width: 90%;
+            max-width: 800px;
+            height: 80%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: #f8f8f8;
+            padding: 15px 20px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .game-frame {
+            width: 100%;
+            height: calc(100% - 60px);
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo">MyGrow Games</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#recently">Recently played</a></li>
+                    <li><a href="#new">New</a></li>
+                    <li><a href="#trending">Trending now</a></li>
+                    <li><a href="#featured">Featured</a></li>
+                </ul>
+            </nav>
+            <div class="language-selector">
+                <a href="#" class="active">English</a>
+                <a href="#">中文</a>
+                <a href="#">Русский</a>
+                <a href="#">Español</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Categories -->
+        <div class="categories">
+            <div class="category-title">Categories</div>
+            <div class="category-tags">
+                <a href="#" class="category-tag active" data-category="all">All Games</a>
+                <a href="#" class="category-tag" data-category="action">Action</a>
+                <a href="#" class="category-tag" data-category="puzzle">Puzzle</a>
+                <a href="#" class="category-tag" data-category="arcade">Arcade</a>
+                <a href="#" class="category-tag" data-category="strategy">Strategy</a>
+                <a href="#" class="category-tag" data-category="sports">Sports</a>
+                <a href="#" class="category-tag" data-category="racing">Racing</a>
+                <a href="#" class="category-tag" data-category="adventure">Adventure</a>
+            </div>
+        </div>
+
+        <!-- Recently played -->
+        <section class="section" id="recently">
+            <div class="section-header">
+                <div class="section-title">Recently played</div>
+                <a href="#" class="view-more">View more</a>
+            </div>
+            <div class="games-grid" id="recentlyGames"></div>
+        </section>
+
+        <!-- Featured games -->
+        <section class="section" id="featured">
+            <div class="section-header">
+                <div class="section-title">Featured games</div>
+                <a href="#" class="view-more">View more</a>
+            </div>
+            <div class="games-grid" id="featuredGames"></div>
+        </section>
+
+        <!-- New games -->
+        <section class="section" id="new">
+            <div class="section-header">
+                <div class="section-title">New games</div>
+                <a href="#" class="view-more">View more</a>
+            </div>
+            <div class="games-grid" id="newGames"></div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 MyGrow Games. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Game Modal -->
+    <div id="gameModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Game Title</h3>
+                <span class="close">&times;</span>
+            </div>
+            <iframe id="gameFrame" class="game-frame" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Game data
+        const allGames = [
+            {
+                id: 1,
+                title: "2048",
+                category: "puzzle",
+                theme: "game-2048",
+                url: "https://play2048.co/",
+                tags: ["Number", "Logic"]
+            },
+            {
+                id: 2,
+                title: "Tetris",
+                category: "puzzle",
+                theme: "game-tetris",
+                url: "https://tetris.com/play-tetris",
+                tags: ["Classic", "Blocks"]
+            },
+            {
+                id: 3,
+                title: "Snake Game",
+                category: "arcade",
+                theme: "game-snake",
+                url: "https://www.google.com/fbx?fbx=snake_arcade",
+                tags: ["Classic", "Arcade"]
+            },
+            {
+                id: 4,
+                title: "Pac-Man",
+                category: "arcade",
+                theme: "game-pacman",
+                url: "https://www.google.com/doodles/30th-anniversary-of-pac-man",
+                tags: ["Classic", "Maze"]
+            },
+            {
+                id: 5,
+                title: "Chess",
+                category: "strategy",
+                theme: "game-chess",
+                url: "https://www.chess.com/play/computer",
+                tags: ["Board", "Strategy"]
+            },
+            {
+                id: 6,
+                title: "Sudoku",
+                category: "puzzle",
+                theme: "game-sudoku",
+                url: "https://sudoku.com/",
+                tags: ["Number", "Logic"]
+            },
+            {
+                id: 7,
+                title: "Solitaire",
+                category: "puzzle",
+                theme: "game-solitaire",
+                url: "https://solitaire.org/",
+                tags: ["Cards", "Classic"]
+            },
+            {
+                id: 8,
+                title: "Minesweeper",
+                category: "puzzle",
+                theme: "game-minesweeper",
+                url: "https://minesweeper.online/",
+                tags: ["Logic", "Classic"]
+            },
+            {
+                id: 9,
+                title: "Frogger",
+                category: "arcade",
+                theme: "game-frogger",
+                url: "https://www.google.com/logos/2017/frogger/frogger17-hp.html",
+                tags: ["Classic", "Action"]
+            },
+            {
+                id: 10,
+                title: "Breakout",
+                category: "arcade",
+                theme: "game-breakout",
+                url: "https://www.google.com/logos/2013/breakout/breakout13-hp2.html",
+                tags: ["Classic", "Blocks"]
+            },
+            {
+                id: 11,
+                title: "Tic Tac Toe",
+                category: "strategy",
+                theme: "game-tictactoe",
+                url: "https://playtictactoe.org/",
+                tags: ["Board", "Classic"]
+            },
+            {
+                id: 12,
+                title: "Flappy Bird",
+                category: "arcade",
+                theme: "game-flappy",
+                url: "https://flappybird.io/",
+                tags: ["Action", "Mobile"]
+            },
+            {
+                id: 13,
+                title: "Checkers",
+                category: "strategy",
+                theme: "game-checkers",
+                url: "https://www.247checkers.com/",
+                tags: ["Board", "Strategy"]
+            },
+            {
+                id: 14,
+                title: "Crossword",
+                category: "puzzle",
+                theme: "game-crossword",
+                url: "https://www.dictionary.com/games/crossword",
+                tags: ["Word", "Brain"]
+            },
+            {
+                id: 15,
+                title: "Mahjong",
+                category: "puzzle",
+                theme: "game-mahjong",
+                url: "https://mahjongtime.com/",
+                tags: ["Tiles", "Classic"]
+            },
+            {
+                id: 16,
+                title: "Bubble Shooter",
+                category: "arcade",
+                theme: "game-bubble",
+                url: "https://www.bubbleshooter.net/",
+                tags: ["Match", "Color"]
+            },
+            {
+                id: 17,
+                title: "Wordle",
+                category: "puzzle",
+                theme: "game-wordle",
+                url: "https://www.nytimes.com/games/wordle/index.html",
+                tags: ["Word", "Daily"]
+            },
+            {
+                id: 18,
+                title: "Spider Solitaire",
+                category: "puzzle",
+                theme: "game-spider",
+                url: "https://spider-solitaire.com/",
+                tags: ["Cards", "Strategy"]
+            },
+            {
+                id: 19,
+                title: "Candy Crush",
+                category: "puzzle",
+                theme: "game-candy",
+                url: "https://king.com/game/candycrush",
+                tags: ["Match", "Sweet"]
+            },
+            {
+                id: 20,
+                title: "Bejeweled",
+                category: "puzzle",
+                theme: "game-jewel",
+                url: "https://www.bejeweled.org/",
+                tags: ["Match", "Gems"]
+            },
+            {
+                id: 21,
+                title: "Pool 8 Ball",
+                category: "sports",
+                theme: "game-pool",
+                url: "https://www.8ballpool.com/",
+                tags: ["Billiards", "Sports"]
+            },
+            {
+                id: 22,
+                title: "Poker",
+                category: "strategy",
+                theme: "game-poker",
+                url: "https://www.pokeronline.com/",
+                tags: ["Cards", "Betting"]
+            },
+            {
+                id: 23,
+                title: "Backgammon",
+                category: "strategy",
+                theme: "game-backgammon",
+                url: "https://www.247backgammon.com/",
+                tags: ["Board", "Classic"]
+            },
+            {
+                id: 24,
+                title: "Pinball",
+                category: "arcade",
+                theme: "game-pinball",
+                url: "https://www.pinballarcade.com/",
+                tags: ["Classic", "Physics"]
+            }
+        ];
+
+        let recentlyPlayed = [];
+
+        // Create game card
+        function createGameCard(game) {
+            return `
+                <div class="game-card" onclick="playGame('${game.url}', '${game.title}', ${game.id})">
+                    <div class="game-image ${game.theme}">
+                        ${game.title}
+                    </div>
+                    <div class="game-info">
+                        <div class="game-title">${game.title}</div>
+                        <div class="game-category">${game.category}</div>
+                        <div class="game-tags">
+                            ${game.tags.map(tag => `<span class="game-tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render games
+        function renderGames() {
+            // Shuffle function
+            function shuffleArray(array) {
+                const shuffled = [...array];
+                for (let i = shuffled.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                }
+                return shuffled;
+            }
+
+            // Featured games (random 12 games)
+            const shuffledGames = shuffleArray(allGames);
+            const featured = shuffledGames.slice(0, 12);
+            document.getElementById('featuredGames').innerHTML = featured.map(createGameCard).join('');
+
+            // New games (latest 8 games)
+            const newGames = allGames.slice(-8);
+            document.getElementById('newGames').innerHTML = newGames.map(createGameCard).join('');
+
+            // Recently played
+            if (recentlyPlayed.length > 0) {
+                document.getElementById('recentlyGames').innerHTML = recentlyPlayed.map(createGameCard).join('');
+            } else {
+                document.getElementById('recentlyGames').innerHTML = '<p style="color: #999; text-align: center; grid-column: 1/-1;">No recently played games</p>';
+            }
+        }
+
+        // Play game
+        function playGame(url, title, gameId) {
+            // Add to recently played
+            const game = allGames.find(g => g.id === gameId);
+            if (game) {
+                recentlyPlayed = recentlyPlayed.filter(g => g.id !== gameId);
+                recentlyPlayed.unshift(game);
+                if (recentlyPlayed.length > 6) {
+                    recentlyPlayed = recentlyPlayed.slice(0, 6);
+                }
+                renderGames();
+            }
+
+            // Open game modal
+            const modal = document.getElementById('gameModal');
+            const frame = document.getElementById('gameFrame');
+            const modalTitle = document.getElementById('modalTitle');
+            
+            modalTitle.textContent = title;
+            frame.src = url;
+            modal.style.display = 'block';
+        }
+
+        // Category filtering
+        document.querySelectorAll('.category-tag').forEach(tag => {
+            tag.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update active state
+                document.querySelectorAll('.category-tag').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                const category = this.dataset.category;
+                
+                // Filter games
+                let filteredGames = category === 'all' ? allGames : allGames.filter(game => game.category === category);
+                
+                // Shuffle filtered games for variety
+                function shuffleArray(array) {
+                    const shuffled = [...array];
+                    for (let i = shuffled.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                    }
+                    return shuffled;
+                }
+                
+                const shuffledFiltered = shuffleArray(filteredGames);
+                
+                // Update all sections with filtered games
+                document.getElementById('featuredGames').innerHTML = shuffledFiltered.slice(0, 12).map(createGameCard).join('');
+                document.getElementById('newGames').innerHTML = shuffledFiltered.slice(-8).map(createGameCard).join('');
+            });
+        });
+
+        // Close modal
+        document.querySelector('.close').addEventListener('click', function() {
+            const modal = document.getElementById('gameModal');
+            const frame = document.getElementById('gameFrame');
+            
+            modal.style.display = 'none';
+            frame.src = '';
+        });
+
+        // Click outside modal to close
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('gameModal');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.getElementById('gameFrame').src = '';
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', renderGames);
+    </script>
+</body>
+</html> 
