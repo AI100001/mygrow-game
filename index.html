@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,130 +12,367 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            background: #ffffff;
+            color: #202124;
+            overflow-x: hidden;
         }
 
-        /* Header */
-        .header {
-            background: #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: sticky;
+        /* 左侧导航栏 */
+        .sidebar {
+            position: fixed;
+            left: 0;
             top: 0;
-            z-index: 100;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            height: 64px;
+            width: 280px;
+            height: 100vh;
+            background: #ffffff;
+            border-right: 1px solid #e8eaed;
+            padding: 20px;
+            z-index: 1000;
+            overflow-y: auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #007bff;
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 10px 0;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #4285f4, #34a853);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #202124;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border-radius: 24px;
+            color: #5f6368;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background: #f1f3f4;
+            color: #202124;
+        }
+
+        .nav-item.active {
+            background: #e8f0fe;
+            color: #1a73e8;
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-text {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 10px;
+            font-size: 12px;
+        }
+
+        .language-selector a {
+            color: #999;
             text-decoration: none;
         }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 0;
+        .language-selector a.active {
+            color: #2c5aa0;
+            font-weight: bold;
         }
 
-        .nav-menu li {
+        /* 主内容区 */
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        /* 顶部搜索栏 */
+        .top-bar {
+            padding: 20px 40px;
+            background: #ffffff;
+            border-bottom: 1px solid #e8eaed;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 6px rgba(32,33,36,.28);
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 500px;
             position: relative;
         }
 
-        .nav-menu a {
-            display: block;
-            padding: 20px 16px;
-            color: #6c757d;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.3s;
+        .search-input {
+            width: 100%;
+            padding: 12px 50px 12px 20px;
+            background: #f8f9fa;
+            border: 1px solid #e8eaed;
+            border-radius: 24px;
+            color: #202124;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
         }
 
-        .nav-menu a:hover,
-        .nav-menu a.active {
-            color: #007bff;
+        .search-input:focus {
+            border-color: #4285f4;
+            box-shadow: 0 1px 6px rgba(32,33,36,.28);
+            background: #ffffff;
+        }
+
+        .search-input::placeholder {
+            color: #5f6368;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #5f6368;
+            cursor: pointer;
         }
 
         .language-selector {
             display: flex;
             gap: 8px;
-            font-size: 13px;
         }
 
-        .language-selector a {
-            padding: 4px 8px;
-            color: #6c757d;
+        .lang-btn {
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border: 1px solid #e8eaed;
+            border-radius: 20px;
+            color: #5f6368;
             text-decoration: none;
-            border-radius: 4px;
-            transition: all 0.3s;
+            font-size: 13px;
+            transition: all 0.3s ease;
         }
 
-        .language-selector a.active,
-        .language-selector a:hover {
-            color: #007bff;
-            background: #e3f2fd;
+        .lang-btn:hover,
+        .lang-btn.active {
+            background: #4285f4;
+            color: #ffffff;
+            border-color: #4285f4;
         }
 
-        /* Main Content */
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 24px 20px;
+            padding: 30px 40px;
         }
 
         /* Categories */
-        .categories-section {
-            margin-bottom: 32px;
+        .categories {
+            margin-bottom: 30px;
         }
 
-        .section-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: #333;
+        .category-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #202124;
         }
 
-        .categories-grid {
+        .category-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
-        .category-btn {
-            background: #fff;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
+        .category-tag {
+            background: #f8f9fa;
+            border: 1px solid #e8eaed;
+            border-radius: 20px;
             padding: 8px 16px;
-            font-size: 14px;
-            color: #6c757d;
+            font-size: 13px;
+            color: #5f6368;
             text-decoration: none;
             transition: all 0.3s;
-            cursor: pointer;
         }
 
-        .category-btn:hover,
-        .category-btn.active {
-            background: #007bff;
-            color: #fff;
-            border-color: #007bff;
+        .category-tag:hover,
+        .category-tag.active {
+            background: #4285f4;
+            color: white;
+            border-color: #4285f4;
         }
 
-        /* Game Sections */
-        .games-section {
+        .view-more {
+            color: #2c5aa0;
+            text-decoration: none;
+            font-size: 14px;
+            float: right;
+            margin-top: -30px;
+        }
+
+        .view-more:hover {
+            text-decoration: underline;
+        }
+
+        /* Games Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
             margin-bottom: 40px;
+        }
+
+        .game-card {
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #e8eaed;
+            position: relative;
+            box-shadow: 0 1px 6px rgba(32,33,36,.28);
+        }
+
+        .game-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(32,33,36,.28);
+            border-color: #4285f4;
+        }
+
+        .game-image {
+            width: 100%;
+            height: 140px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .game-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+        }
+
+        /* HOT标签 */
+        .hot-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #ea4335;
+            color: #ffffff;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .new-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #34a853;
+            color: #ffffff;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .game-info {
+            padding: 16px;
+        }
+
+        .game-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #202124;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .game-category {
+            font-size: 12px;
+            color: #5f6368;
+            margin-bottom: 12px;
+        }
+
+        .game-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .game-tag {
+            background: #e8f0fe;
+            color: #1a73e8;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+
+
+        /* Sections */
+        .section {
+            margin-bottom: 50px;
         }
 
         .section-header {
@@ -145,151 +382,53 @@
             margin-bottom: 20px;
         }
 
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #202124;
+        }
+
         .view-more {
-            font-size: 14px;
-            color: #007bff;
+            color: #1a73e8;
             text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border: 1px solid #1a73e8;
+            border-radius: 20px;
+            transition: all 0.3s ease;
         }
 
         .view-more:hover {
-            text-decoration: underline;
+            background: #1a73e8;
+            color: #ffffff;
         }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 20px;
-        }
-
-        .game-card {
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .game-card:hover {
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-            transform: translateY(-2px);
-        }
-
-        .game-thumbnail {
-            width: 100%;
-            height: 160px;
-            background: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: 600;
-            color: #fff;
-            text-align: center;
-            position: relative;
-        }
-
-        .game-info {
-            padding: 16px;
-        }
-
-        .game-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-
-        .game-description {
-            font-size: 14px;
-            color: #6c757d;
-            margin-bottom: 8px;
-        }
-
-        .game-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-
-        .game-tag {
-            background: #f8f9fa;
-            color: #6c757d;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-        }
-
-        /* Game Thumbnails */
-        .thumb-2048 { background: linear-gradient(135deg, #ffc107, #ff9800); }
-        .thumb-tetris { background: linear-gradient(135deg, #9c27b0, #673ab7); }
-        .thumb-snake { background: linear-gradient(135deg, #4caf50, #2e7d32); }
-        .thumb-pacman { background: linear-gradient(135deg, #ffeb3b, #ffc107); color: #333 !important; }
-        .thumb-chess { background: linear-gradient(135deg, #795548, #5d4037); }
-        .thumb-sudoku { background: linear-gradient(135deg, #3f51b5, #303f9f); }
-        .thumb-solitaire { background: linear-gradient(135deg, #e91e63, #c2185b); }
-        .thumb-minesweeper { background: linear-gradient(135deg, #607d8b, #455a64); }
-        .thumb-bubble { background: linear-gradient(135deg, #ff5722, #d84315); }
-        .thumb-wordle { background: linear-gradient(135deg, #4caf50, #388e3c); }
-        .thumb-crossword { background: linear-gradient(135deg, #ff9800, #f57c00); }
-        .thumb-mahjong { background: linear-gradient(135deg, #f44336, #d32f2f); }
 
         /* Footer */
         .footer {
-            background: #fff;
-            border-top: 1px solid #dee2e6;
+            background: white;
+            border-top: 1px solid #ddd;
             margin-top: 60px;
-            padding: 40px 0;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 40px;
-        }
-
-        .footer-section h3 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: #333;
-        }
-
-        .footer-section p {
-            color: #6c757d;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 8px;
-        }
-
-        .footer-links a {
-            color: #6c757d;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .footer-links a:hover {
-            color: #007bff;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid #dee2e6;
-            margin-top: 32px;
-            padding-top: 24px;
+            padding: 30px 0;
             text-align: center;
-            color: #6c757d;
-            font-size: 14px;
+            color: #666;
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .language-selector {
+                display: none;
+            }
+            
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 10px;
+            }
         }
 
         /* Game Modal */
@@ -301,418 +440,1216 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.5);
         }
 
         .modal-content {
             position: relative;
-            margin: 2% auto;
-            width: 95%;
-            max-width: 1000px;
-            height: 90%;
-            background: white;
-            border-radius: 8px;
+            margin: 5% auto;
+            width: 90%;
+            max-width: 800px;
+            height: 80%;
+            background: #ffffff;
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 8px 32px rgba(32,33,36,.28);
         }
 
         .modal-header {
-            background: #f8f9fa;
-            padding: 16px 20px;
-            border-bottom: 1px solid #dee2e6;
+            background: #ffffff;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e8eaed;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .modal-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
+        .close {
+            color: #5f6368;
             font-size: 24px;
-            color: #6c757d;
+            font-weight: bold;
             cursor: pointer;
-            padding: 0;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            line-height: 1;
+            transition: color 0.3s ease;
         }
 
-        .close-btn:hover {
-            color: #333;
+        .close:hover {
+            color: #202124;
         }
 
         .game-frame {
             width: 100%;
-            height: calc(100% - 64px);
+            height: calc(100% - 60px);
             border: none;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-            
-            .language-selector {
-                display: none;
-            }
-            
-            .games-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 16px;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="nav-container">
-            <a href="#" class="logo">MyGrow Games</a>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#recently">Recently played</a></li>
-                    <li><a href="#new">New</a></li>
-                    <li><a href="#trending">Trending now</a></li>
-                    <li><a href="#featured">Featured</a></li>
-                </ul>
-            </nav>
-            <div class="language-selector">
-                <a href="#" class="active">English</a>
-                <a href="#">中文</a>
-                <a href="#">Русский</a>
-                <a href="#">Español</a>
+    <!-- 左侧导航栏 -->
+    <div class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">🎮</div>
+            <div class="logo-text">MyGrow Games</div>
             </div>
+
+        <div class="nav-item active" data-section="home">
+            <div class="nav-icon">🏠</div>
+            <div class="nav-text">Home</div>
         </div>
-    </header>
 
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Categories -->
-        <section class="categories-section">
-            <h2 class="section-title">Categories</h2>
-            <div class="categories-grid">
-                <button class="category-btn active" data-category="all">All Games</button>
-                <button class="category-btn" data-category="puzzle">Puzzle</button>
-                <button class="category-btn" data-category="arcade">Arcade</button>
-                <button class="category-btn" data-category="strategy">Strategy</button>
-                <button class="category-btn" data-category="action">Action</button>
-                <button class="category-btn" data-category="sports">Sports</button>
-                <button class="category-btn" data-category="casual">Casual</button>
+        <div class="nav-item" data-section="recently">
+            <div class="nav-icon">🕐</div>
+            <div class="nav-text">Recently played</div>
             </div>
-        </section>
 
-        <!-- Recently played -->
-        <section class="games-section" id="recently">
-            <div class="section-header">
-                <h2 class="section-title">Recently played</h2>
-                <a href="#" class="view-more">View more</a>
-            </div>
-            <div class="games-grid" id="recentlyGames">
-                <div style="grid-column: 1/-1; text-align: center; color: #6c757d; padding: 40px 0;">
-                    No recently played games
+        <div class="nav-item" data-section="new">
+            <div class="nav-icon">⭐</div>
+            <div class="nav-text">New</div>
+        </div>
+
+        <div class="nav-item" data-section="trending">
+            <div class="nav-icon">📈</div>
+            <div class="nav-text">Trending now</div>
+        </div>
+
+        <div class="nav-item" data-section="featured">
+            <div class="nav-icon">👑</div>
+            <div class="nav-text">Featured</div>
+        </div>
+
+        <div style="margin: 20px 0; height: 1px; background: #e8eaed;"></div>
+
+        <div style="color: #5f6368; font-size: 12px; font-weight: 600; text-transform: uppercase; margin: 20px 16px 12px 16px; letter-spacing: 0.5px;">Categories</div>
+
+        <div class="nav-item" data-category="all">
+            <div class="nav-icon">🎯</div>
+            <div class="nav-text">All Games</div>
+        </div>
+
+        <div class="nav-item" data-category="casual">
+            <div class="nav-icon">😊</div>
+            <div class="nav-text">Casual</div>
+        </div>
+
+        <div class="nav-item" data-category="puzzle">
+            <div class="nav-icon">🧩</div>
+            <div class="nav-text">Puzzle</div>
+        </div>
+
+        <div class="nav-item" data-category="action">
+            <div class="nav-icon">⚡</div>
+            <div class="nav-text">Action</div>
+        </div>
+
+        <div class="nav-item" data-category="adventure">
+            <div class="nav-icon">🗺️</div>
+            <div class="nav-text">Adventure</div>
+        </div>
+
+        <div class="nav-item" data-category="sports">
+            <div class="nav-icon">🏆</div>
+            <div class="nav-text">Sports</div>
+        </div>
+
+        <div class="nav-item" data-category="racing">
+            <div class="nav-icon">🏎️</div>
+            <div class="nav-text">Racing</div>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content">
+        <!-- 顶部搜索栏 -->
+        <div class="top-bar">
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Search games..." id="searchInput">
+                    <button class="search-btn" onclick="performSearch()">🔍</button>
+                </div>
+                <div class="language-selector">
+                    <a href="#" class="lang-btn active" onclick="switchLanguage('en', event)">English</a>
+                    <a href="#" class="lang-btn" onclick="switchLanguage('zh', event)">中文</a>
+                    <a href="#" class="lang-btn" onclick="switchLanguage('ru', event)">Русский</a>
+                    <a href="#" class="lang-btn" onclick="switchLanguage('es', event)">Español</a>
                 </div>
             </div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="container">
+
+        <!-- Recently played -->
+        <section class="section" id="recently">
+            <div class="section-header">
+                <div class="section-title">Recently played</div>
+                <a href="#" class="view-more">View more</a>
+            </div>
+            <div class="games-grid" id="recentlyGames"></div>
         </section>
 
         <!-- Featured games -->
-        <section class="games-section" id="featured">
+        <section class="section" id="featured">
             <div class="section-header">
-                <h2 class="section-title">Featured games</h2>
+                <div class="section-title">Featured games</div>
                 <a href="#" class="view-more">View more</a>
             </div>
             <div class="games-grid" id="featuredGames"></div>
         </section>
 
         <!-- New games -->
-        <section class="games-section" id="new">
+        <section class="section" id="new">
             <div class="section-header">
-                <h2 class="section-title">New games</h2>
+                <div class="section-title">New games</div>
                 <a href="#" class="view-more">View more</a>
             </div>
             <div class="games-grid" id="newGames"></div>
         </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>MyGrow Games</h3>
-                <p>MyGrow Games is a platform that offers various free online HTML5 games, including casual games, puzzle games, action games, and many more.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">All Games</a></li>
-                    <li><a href="#">New Games</a></li>
-                    <li><a href="#">Trending Games</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Site Navigation</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Sitemap</a></li>
-                    <li><a href="#">All Tags</a></li>
-                    <li><a href="#">Featured Games</a></li>
-                    <li><a href="#">Recently Played</a></li>
-                </ul>
-            </div>
+    </div>
         </div>
-        <div class="footer-bottom">
-            © 2025 MyGrow Games. All Rights Reserved.
-        </div>
-    </footer>
 
     <!-- Game Modal -->
     <div id="gameModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="modalTitle">Game Title</h3>
-                <button class="close-btn" onclick="closeModal()">&times;</button>
+                <h3 id="modalTitle">Game Title</h3>
+                <span class="close">&times;</span>
             </div>
             <iframe id="gameFrame" class="game-frame" src=""></iframe>
         </div>
     </div>
 
     <script>
-        // Game data
-        const games = [
-            {
-                id: 1,
-                title: "2048",
-                category: "puzzle",
-                thumbnail: "thumb-2048",
-                description: "Join the numbers and get to the 2048 tile!",
-                url: "https://play2048.co/",
-                tags: ["Number", "Logic", "Math"]
+        let allGames = [];
+        let recentlyPlayed = JSON.parse(localStorage.getItem('recentlyPlayed') || '[]');
+        let currentLanguage = localStorage.getItem('currentLanguage') || 'en';
+
+        // 多语言文本数据
+        const translations = {
+            en: {
+                searchPlaceholder: "Search games...",
+                loadingPlaceholder: "Loading games data...",
+                recentlyPlayed: "Recently played",
+                featuredGames: "Featured games",
+                newGames: "New games",
+                trendingNow: "Trending now",
+                viewMore: "View more",
+                home: "Home",
+                new: "New",
+                featured: "Featured",
+                categories: "Categories",
+                allGames: "All Games",
+                casual: "Casual",
+                puzzle: "Puzzle",
+                action: "Action",
+                adventure: "Adventure",
+                sports: "Sports",
+                racing: "Racing",
+                startPlayingMessage: "Start playing to see your history here",
+                loadingGames: "Loading games...",
+                totalGamesAvailable: "Total games available",
+                remaining: "remaining",
+                gameNotAvailable: "This game is not available for play at the moment.",
+                showingLatest: "Showing latest",
+                games: "games",
+                newGamesAvailable: "new games available",
+                hotGamesTrending: "hot games trending now",
+                trendingGamesSelected: "trending games selected for you",
+                gameFeatures: "Game Features",
+                category: "Category",
+                tags: "Tags",
+                gameId: "Game ID",
+                openInNewTab: "Open in New Tab",
+                close: "Close",
+                frameLoadingNote: "Some games may not load in embedded frames due to security policies, but can be played normally in a new tab"
             },
-            {
-                id: 2,
-                title: "Tetris",
-                category: "puzzle",
-                thumbnail: "thumb-tetris",
-                description: "The classic block-dropping puzzle game",
-                url: "https://tetris.com/play-tetris",
-                tags: ["Classic", "Blocks", "Puzzle"]
+            zh: {
+                searchPlaceholder: "搜索游戏...",
+                loadingPlaceholder: "正在加载游戏数据...",
+                recentlyPlayed: "最近游玩",
+                featuredGames: "精选游戏",
+                newGames: "新游戏",
+                trendingNow: "当前热门",
+                viewMore: "查看更多",
+                home: "首页",
+                new: "新游戏",
+                featured: "精选",
+                categories: "分类",
+                allGames: "所有游戏",
+                casual: "休闲",
+                puzzle: "益智",
+                action: "动作",
+                adventure: "冒险",
+                sports: "体育",
+                racing: "竞速",
+                startPlayingMessage: "开始游戏以查看您的历史记录",
+                loadingGames: "正在加载游戏...",
+                totalGamesAvailable: "可用游戏总数",
+                remaining: "剩余",
+                gameNotAvailable: "此游戏暂时无法游玩。",
+                showingLatest: "显示最新",
+                games: "游戏",
+                newGamesAvailable: "个新游戏可用",
+                hotGamesTrending: "个热门游戏正在流行",
+                trendingGamesSelected: "个热门游戏为您精选",
+                gameFeatures: "游戏特色",
+                category: "分类",
+                tags: "标签",
+                gameId: "游戏ID",
+                openInNewTab: "在新标签页中打开",
+                close: "关闭",
+                frameLoadingNote: "某些游戏可能因为安全策略无法在嵌入框架中加载，但可以在新标签页中正常游玩"
             },
-            {
-                id: 3,
-                title: "Snake Game",
-                category: "arcade",
-                thumbnail: "thumb-snake",
-                description: "Control the snake and eat apples to grow",
-                url: "https://www.google.com/fbx?fbx=snake_arcade",
-                tags: ["Classic", "Arcade", "Retro"]
+            ru: {
+                searchPlaceholder: "Поиск игр...",
+                loadingPlaceholder: "Загрузка данных игр...",
+                recentlyPlayed: "Недавно сыгранные",
+                featuredGames: "Рекомендуемые игры",
+                newGames: "Новые игры",
+                trendingNow: "В тренде сейчас",
+                viewMore: "Посмотреть больше",
+                home: "Главная",
+                new: "Новое",
+                featured: "Рекомендуемые",
+                categories: "Категории",
+                allGames: "Все игры",
+                casual: "Казуальные",
+                puzzle: "Головоломки",
+                action: "Экшен",
+                adventure: "Приключения",
+                sports: "Спорт",
+                racing: "Гонки",
+                startPlayingMessage: "Начните играть, чтобы увидеть историю здесь",
+                loadingGames: "Загрузка игр...",
+                totalGamesAvailable: "Доступно игр",
+                remaining: "осталось",
+                gameNotAvailable: "Эта игра сейчас недоступна для игры.",
+                showingLatest: "Показаны последние",
+                games: "игры",
+                newGamesAvailable: "новых игр доступно",
+                hotGamesTrending: "популярных игр в тренде",
+                trendingGamesSelected: "трендовых игр выбрано для вас",
+                gameFeatures: "Особенности игры",
+                category: "Категория",
+                tags: "Теги",
+                gameId: "ID игры",
+                openInNewTab: "Открыть в новой вкладке",
+                close: "Закрыть",
+                frameLoadingNote: "Некоторые игры могут не загружаться во встроенных фреймах из-за политик безопасности, но могут нормально работать в новой вкладке"
             },
-            {
-                id: 4,
-                title: "Pac-Man",
-                category: "arcade",
-                thumbnail: "thumb-pacman",
-                description: "Navigate the maze and avoid the ghosts",
-                url: "https://www.google.com/doodles/30th-anniversary-of-pac-man",
-                tags: ["Classic", "Maze", "Arcade"]
-            },
-            {
-                id: 5,
-                title: "Chess",
-                category: "strategy",
-                thumbnail: "thumb-chess",
-                description: "Play chess against the computer",
-                url: "https://www.chess.com/play/computer",
-                tags: ["Board", "Strategy", "Classic"]
-            },
-            {
-                id: 6,
-                title: "Sudoku",
-                category: "puzzle",
-                thumbnail: "thumb-sudoku",
-                description: "Fill the grid with numbers 1-9",
-                url: "https://sudoku.com/",
-                tags: ["Number", "Logic", "Brain"]
-            },
-            {
-                id: 7,
-                title: "Solitaire",
-                category: "casual",
-                thumbnail: "thumb-solitaire",
-                description: "The classic card game for one player",
-                url: "https://solitaire.org/",
-                tags: ["Cards", "Classic", "Casual"]
-            },
-            {
-                id: 8,
-                title: "Minesweeper",
-                category: "puzzle",
-                thumbnail: "thumb-minesweeper",
-                description: "Clear the minefield without exploding",
-                url: "https://minesweeper.online/",
-                tags: ["Logic", "Classic", "Strategy"]
-            },
-            {
-                id: 9,
-                title: "Bubble Shooter",
-                category: "casual",
-                thumbnail: "thumb-bubble",
-                description: "Match 3 or more bubbles to pop them",
-                url: "https://www.bubbleshooter.net/",
-                tags: ["Match", "Color", "Casual"]
-            },
-            {
-                id: 10,
-                title: "Wordle",
-                category: "puzzle",
-                thumbnail: "thumb-wordle",
-                description: "Guess the 5-letter word in 6 tries",
-                url: "https://www.nytimes.com/games/wordle/index.html",
-                tags: ["Word", "Daily", "Brain"]
-            },
-            {
-                id: 11,
-                title: "Crossword",
-                category: "puzzle",
-                thumbnail: "thumb-crossword",
-                description: "Solve crossword puzzles online",
-                url: "https://www.dictionary.com/games/crossword",
-                tags: ["Word", "Brain", "Classic"]
-            },
-            {
-                id: 12,
-                title: "Mahjong",
-                category: "puzzle",
-                thumbnail: "thumb-mahjong",
-                description: "Match identical tiles to clear the board",
-                url: "https://mahjongtime.com/",
-                tags: ["Tiles", "Classic", "Strategy"]
+            es: {
+                searchPlaceholder: "Buscar juegos...",
+                loadingPlaceholder: "Cargando datos de juegos...",
+                recentlyPlayed: "Jugados recientemente",
+                featuredGames: "Juegos destacados",
+                newGames: "Juegos nuevos",
+                trendingNow: "Tendencia ahora",
+                viewMore: "Ver más",
+                home: "Inicio",
+                new: "Nuevo",
+                featured: "Destacados",
+                categories: "Categorías",
+                allGames: "Todos los juegos",
+                casual: "Casual",
+                puzzle: "Rompecabezas",
+                action: "Acción",
+                adventure: "Aventura",
+                sports: "Deportes",
+                racing: "Carreras",
+                startPlayingMessage: "Comienza a jugar para ver tu historial aquí",
+                loadingGames: "Cargando juegos...",
+                totalGamesAvailable: "Total de juegos disponibles",
+                remaining: "restantes",
+                gameNotAvailable: "Este juego no está disponible para jugar en este momento.",
+                showingLatest: "Mostrando los últimos",
+                games: "juegos",
+                newGamesAvailable: "nuevos juegos disponibles",
+                hotGamesTrending: "juegos populares en tendencia",
+                trendingGamesSelected: "juegos en tendencia seleccionados para ti",
+                gameFeatures: "Características del juego",
+                category: "Categoría",
+                tags: "Etiquetas",
+                gameId: "ID del juego",
+                openInNewTab: "Abrir en nueva pestaña",
+                close: "Cerrar",
+                frameLoadingNote: "Algunos juegos pueden no cargarse en marcos integrados debido a políticas de seguridad, pero pueden jugarse normalmente en una nueva pestaña"
             }
-        ];
+        };
 
-        let recentlyPlayed = [];
+        // 获取当前语言的文本
+        function t(key) {
+            return translations[currentLanguage] && translations[currentLanguage][key] 
+                ? translations[currentLanguage][key] 
+                : translations.en[key] || key;
+        }
 
-        // Create game card
-        function createGameCard(game) {
-            return `
-                <div class="game-card" onclick="playGame('${game.url}', '${game.title}', ${game.id})">
-                    <div class="game-thumbnail ${game.thumbnail}">
-                        ${game.title}
+        // 切换语言
+        function switchLanguage(lang, event) {
+            event.preventDefault();
+            
+            currentLanguage = lang;
+            localStorage.setItem('currentLanguage', lang);
+            
+            // 更新语言按钮状态
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // 更新页面文本
+            updatePageTexts();
+            
+            // 重新渲染游戏列表
+            displayFeaturedGames();
+            updateRecentlyPlayed();
+        }
+
+        // 更新页面文本
+        function updatePageTexts() {
+            // 更新搜索框占位符
+            const searchInput = document.getElementById('searchInput');
+            if (allGames.length > 0) {
+                searchInput.placeholder = `${t('searchPlaceholder')} ${allGames.length} ${t('games')}...`;
+            } else {
+                searchInput.placeholder = t('searchPlaceholder');
+            }
+            
+            // 更新导航菜单
+            const navTexts = document.querySelectorAll('.nav-text');
+            const navKeys = ['home', 'recentlyPlayed', 'new', 'trendingNow', 'featured', 'categories', 'allGames', 'casual', 'puzzle', 'action', 'adventure', 'sports', 'racing'];
+            
+            navTexts.forEach((textEl, index) => {
+                if (navKeys[index]) {
+                    textEl.textContent = t(navKeys[index]);
+                }
+            });
+            
+            // 更新分区标题
+            document.querySelectorAll('.section-title').forEach(title => {
+                const sectionId = title.closest('.section').id;
+                switch(sectionId) {
+                    case 'recently':
+                        title.textContent = t('recentlyPlayed');
+                        break;
+                    case 'featured':
+                        title.textContent = t('featuredGames');
+                        break;
+                    case 'new':
+                        title.textContent = t('newGames');
+                        break;
+                }
+            });
+            
+            // 更新"查看更多"按钮
+            document.querySelectorAll('.view-more').forEach(btn => {
+                btn.textContent = t('viewMore');
+            });
+            
+            // 更新分类标签
+            const categoryDiv = document.querySelector('[style*="text-transform: uppercase"]');
+            if (categoryDiv) {
+                categoryDiv.textContent = t('categories');
+            }
+        }
+
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化语言设置
+            initializeLanguage();
+            loadGamesData();
+            setupEventListeners();
+            updateRecentlyPlayed();
+        });
+
+        // 初始化语言设置
+        function initializeLanguage() {
+            // 设置正确的语言按钮为激活状态
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.onclick.toString().includes(`'${currentLanguage}'`)) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // 更新页面文本
+            updatePageTexts();
+        }
+
+        // 加载游戏数据
+        async function loadGamesData() {
+            // 显示加载状态
+            const searchInput = document.getElementById('searchInput');
+            searchInput.placeholder = t('loadingPlaceholder');
+            
+            try {
+                console.log('🎮 Loading games data from JSON file...');
+                const response = await fetch('游戏合集/games_data_with_images.json');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                allGames = await response.json();
+                console.log(`✅ Successfully loaded ${allGames.length} games!`);
+                
+                // 更新搜索框占位符
+                searchInput.placeholder = `${t('searchPlaceholder')} ${allGames.length} ${t('games')}...`;
+                
+                // 在控制台显示一些示例游戏
+                console.log('📋 Sample games:', allGames.slice(0, 3));
+                
+                displayFeaturedGames();
+                
+                // 显示成功通知
+                showNotification(`🎉 ${t('loadingGames')} ${allGames.length} ${t('games')} successfully!`, 'success');
+                
+            } catch (error) {
+                console.error('❌ Failed to load games data:', error);
+                console.log('🔄 Using fallback demo games...');
+                
+                // 创建更多演示游戏数据
+                allGames = createDemoGames();
+                
+                searchInput.placeholder = `${t('searchPlaceholder')} ${allGames.length} playable ${t('games')}...`;
+                displayFeaturedGames();
+                
+                // 显示成功通知
+                showNotification(`🎮 ${t('loadingGames')} ${allGames.length} playable ${t('games')} successfully!`, 'success');
+            }
+        }
+
+        // 创建真实可玩的游戏数据
+        function createDemoGames() {
+            // 定义真实可玩的游戏列表
+            const realGames = [
+                {
+                    id: '1v1-lol',
+                    title: '1v1.LOL',
+                    category: 'action',
+                    tags: ['Action', 'Multiplayer', 'Shooter', '3D'],
+                    embedUrl: 'https://www.crazygames.com/embed/1v1-lol',
+                    isHot: true,
+                    isNew: false,
+                    description: '1v1.LOL is a competitive online third-person shooter where you build your way around the map tactically.'
+                },
+                {
+                    id: 'shell-shockers',
+                    title: 'Shell Shockers',
+                    category: 'action',
+                    tags: ['Action', 'Multiplayer', 'FPS', '3D'],
+                    embedUrl: 'https://www.crazygames.com/embed/shell-shockers',
+
+                    isHot: true,
+                    isNew: false,
+                    description: 'Shell Shockers is a multiplayer .io FPS game featuring eggs armed with guns.'
+                },
+                {
+                    id: 'moto-x3m',
+                    title: 'Moto X3M',
+                    category: 'racing',
+                    tags: ['Racing', 'Sports', 'Bike', 'Stunt'],
+                    embedUrl: 'https://www.crazygames.com/embed/moto-x3m',
+                    isHot: false,
+                    isNew: false,
+                    description: 'Moto X3M is a driving bike game that takes dirt bike racing to the next level.'
+                },
+                {
+                    id: 'drift-hunters',
+                    title: 'Drift Hunters',
+                    category: 'racing',
+                    tags: ['Racing', 'Car', 'Drifting', '3D'],
+                    embedUrl: 'https://www.crazygames.com/embed/drift-hunters',
+                    isHot: false,
+                    isNew: false,
+                    description: 'Drift Hunters is a free-to-play car 3D game that lets you experience the art of drifting.'
+                },
+                {
+                    id: 'basketbros',
+                    title: 'BasketBros',
+                    category: 'sports',
+                    tags: ['Sports', 'Basketball', 'Multiplayer', '2D'],
+                    embedUrl: 'https://www.crazygames.com/embed/basketbros',
+                    isHot: false,
+                    isNew: true,
+                    description: 'BasketBros is a fast-paced basketball game with online and offline gameplay.'
+                },
+                {
+                    id: 'tiny-fishing',
+                    title: 'Tiny Fishing',
+                    category: 'casual',
+                    tags: ['Casual', 'Fishing', 'Relaxing', '2D'],
+                    embedUrl: 'https://www.crazygames.com/embed/tiny-fishing',
+                    isHot: false,
+                    isNew: false,
+                    description: 'Tiny Fishing is a relaxing fishing game where you catch fish and upgrade your gear.'
+                },
+                {
+                    id: 'blumgi-ball',
+                    title: 'Blumgi Ball',
+                    category: 'sports',
+                    tags: ['Sports', 'Basketball', 'Physics', '2D'],
+                    embedUrl: 'https://www.crazygames.com/embed/blumgi-ball',
+                    isHot: false,
+                    isNew: false,
+                    description: 'Blumgi Ball is a physics-based basketball game with unique mechanics.'
+                },
+                {
+                    id: 'stick-merge',
+                    title: 'Stick Merge',
+                    category: 'casual',
+                    tags: ['Casual', 'Merge', 'Strategy', '2D'],
+                    embedUrl: 'https://www.crazygames.com/embed/stick-merge',
+                    isHot: false,
+                    isNew: true,
+                    description: 'Stick Merge is a casual merge game where you combine sticks to create powerful weapons.'
+                },
+                {
+                    id: 'temple-run-2',
+                    title: 'Temple Run 2',
+                    category: 'adventure',
+                    tags: ['Adventure', 'Running', 'Mobile', '3D'],
+                    embedUrl: 'https://www.crazygames.com/embed/temple-run-2',
+                    isHot: true,
+                    isNew: false,
+                    description: 'Temple Run 2 is an endless running adventure game with stunning graphics.'
+                },
+                {
+                    id: 'subway-surfers',
+                    title: 'Subway Surfers',
+                    category: 'adventure',
+                    tags: ['Adventure', 'Running', 'Mobile', '3D'],
+                    embedUrl: 'https://www.crazygames.com/embed/subway-surfers',
+                    isHot: true,
+                    isNew: false,
+                    description: 'Subway Surfers is a classic endless running game where you dash through subway tracks.'
+                },
+                {
+                    id: 'house-of-hazards',
+                    title: 'House of Hazards',
+                    category: 'casual',
+                    tags: ['Casual', 'Multiplayer', 'Party', '2D'],
+                    embedUrl: 'https://www.crazygames.com/embed/house-of-hazards',
+                    isHot: false,
+                    isNew: false,
+                    description: 'House of Hazards is a hilarious party game where you navigate through a dangerous house.'
+                },
+                {
+                    id: 'crossy-road',
+                    title: 'Crossy Road',
+                    category: 'arcade',
+                    tags: ['Arcade', 'Casual', 'Mobile', '3D'],
+                    embedUrl: 'https://www.crazygames.com/embed/crossy-road',
+                    isHot: false,
+                    isNew: false,
+                    description: 'Crossy Road is an arcade game where you help characters cross busy roads and rivers.'
+                },
+                {
+                    id: 'getting-over-it',
+                    title: 'Getting Over It',
+                    category: 'adventure',
+                    tags: ['Adventure', 'Difficult', 'Climbing', '2D'],
+                    embedUrl: 'https://www.crazygames.com/embed/getting-over-it',
+                    isHot: false,
+                    isNew: false,
+                    description: 'Getting Over It is a challenging climbing game that will test your patience.'
+                },
+                {
+                    id: 'geometry-dash',
+                    title: 'Geometry Dash',
+                    category: 'arcade',
+                    tags: ['Arcade', 'Rhythm', 'Platformer', '2D'],
+                    embedUrl: 'https://www.crazygames.com/embed/geometry-dash',
+                    isHot: true,
+                    isNew: false,
+                    description: 'Geometry Dash is a rhythm-based platformer with challenging obstacles.'
+                },
+                {
+                    id: 'slope',
+                    title: 'Slope',
+                    category: 'arcade',
+                    tags: ['Arcade', 'Speed', 'Endless', '3D'],
+                    embedUrl: 'https://www.crazygames.com/embed/slope',
+                    isHot: false,
+                    isNew: false,
+                    description: 'Slope is a high-speed 3D running game where you control a ball down a slope.'
+                },
+                {
+                    id: 'run-3',
+                    title: 'Run 3',
+                    category: 'arcade',
+                    tags: ['Arcade', 'Running', 'Space', '3D'],
+                    embedUrl: 'https://www.crazygames.com/embed/run-3',
+                    isHot: false,
+                    isNew: false,
+                    description: 'Run 3 is an endless running game set in space with unique gravity mechanics.'
+                },
+                {
+                    id: 'happy-wheels',
+                    title: 'Happy Wheels',
+                    category: 'action',
+                    tags: ['Action', 'Physics', 'Ragdoll', '2D'],
+                    embedUrl: 'https://www.crazygames.com/embed/happy-wheels',
+                    isHot: false,
+                    isNew: false,
+                    description: 'Happy Wheels is a ragdoll physics game with challenging obstacle courses.'
+                },
+                {
+                    id: 'fireboy-watergirl',
+                    title: 'Fireboy and Watergirl',
+                    category: 'puzzle',
+                    tags: ['Puzzle', 'Cooperation', 'Adventure', '2D'],
+                    embedUrl: 'https://www.crazygames.com/embed/fireboy-and-watergirl-forest-temple',
+                    isHot: false,
+                    isNew: false,
+                    description: 'Fireboy and Watergirl is a cooperative puzzle game where you control two characters.'
+                },
+                {
+                    id: 'paper-io-2',
+                    title: 'Paper.io 2',
+                    category: 'arcade',
+                    tags: ['Arcade', 'Multiplayer', 'Territory', '2D'],
+                    embedUrl: 'https://www.crazygames.com/embed/paper-io-2',
+                    isHot: false,
+                    isNew: true,
+                    description: 'Paper.io 2 is a multiplayer territory game where you conquer areas by drawing lines.'
+                },
+                {
+                    id: 'wordle',
+                    title: 'Wordle',
+                    category: 'puzzle',
+                    tags: ['Puzzle', 'Word', 'Logic', '2D'],
+                    embedUrl: 'https://www.crazygames.com/embed/wordle',
+                    isHot: true,
+                    isNew: true,
+                    description: 'Wordle is a daily word puzzle game where you guess a five-letter word.'
+                }
+            ];
+            
+            return realGames;
+        }
+
+        // 显示通知
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 500;
+                z-index: 10000;
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+                max-width: 300px;
+                ${type === 'success' ? 'background: linear-gradient(45deg, #10b981, #059669);' : ''}
+                ${type === 'warning' ? 'background: linear-gradient(45deg, #f59e0b, #d97706);' : ''}
+                ${type === 'error' ? 'background: linear-gradient(45deg, #ef4444, #dc2626);' : ''}
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // 动画显示
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // 3秒后自动隐藏
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // 显示精选游戏
+        function displayFeaturedGames() {
+            const grid = document.getElementById('featuredGames');
+            grid.innerHTML = '';
+
+            if (allGames.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #5f6368;">
+                        <div style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;">⏳</div>
+                        <div style="font-size: 16px; margin-bottom: 8px;">${t('loadingGames')}</div>
+                        <div style="font-size: 14px; opacity: 0.7;">${t('totalGamesAvailable')}: ${allGames.length}</div>
                     </div>
-                    <div class="game-info">
-                        <div class="game-title">${game.title}</div>
-                        <div class="game-description">${game.description}</div>
-                        <div class="game-tags">
-                            ${game.tags.map(tag => `<span class="game-tag">${tag}</span>`).join('')}
+                `;
+                return;
+            }
+
+            // 显示所有游戏
+            allGames.forEach((game, index) => {
+                const gameCard = createGameCard(game, index);
+                grid.appendChild(gameCard);
+            });
+
+            // 显示游戏统计
+            console.log(`Loaded ${allGames.length} playable games`);
+        }
+
+                // 创建游戏卡片
+        function createGameCard(game, index) {
+            const card = document.createElement('div');
+            card.className = 'game-card';
+            
+            let badgeHtml = '';
+            if (game.isHot) {
+                badgeHtml = '<div class="hot-badge">HOT</div>';
+            } else if (game.isNew) {
+                badgeHtml = '<div class="new-badge">NEW</div>';
+            }
+
+            // 为每个游戏设置独特的背景和图标
+            const gameStyles = {
+                '1v1-lol': { bg: 'linear-gradient(135deg, #ff6b6b, #ee5a52)', icon: '🎯' },
+                'shell-shockers': { bg: 'linear-gradient(135deg, #feca57, #ff9ff3)', icon: '🥚' },
+                'moto-x3m': { bg: 'linear-gradient(135deg, #ff9068, #fd746c)', icon: '🏍️' },
+                'drift-hunters': { bg: 'linear-gradient(135deg, #3742fa, #2f3542)', icon: '🏎️' },
+                'basketbros': { bg: 'linear-gradient(135deg, #ff7675, #e17055)', icon: '🏀' },
+                'tiny-fishing': { bg: 'linear-gradient(135deg, #74b9ff, #0984e3)', icon: '🎣' },
+                'blumgi-ball': { bg: 'linear-gradient(135deg, #fd79a8, #e84393)', icon: '⛹️' },
+                'stick-merge': { bg: 'linear-gradient(135deg, #fdcb6e, #e17055)', icon: '⚔️' },
+                'temple-run-2': { bg: 'linear-gradient(135deg, #6c5ce7, #a29bfe)', icon: '🏃' },
+                'subway-surfers': { bg: 'linear-gradient(135deg, #00b894, #00cec9)', icon: '🚇' },
+                'house-of-hazards': { bg: 'linear-gradient(135deg, #fab1a0, #e17055)', icon: '🏠' },
+                'crossy-road': { bg: 'linear-gradient(135deg, #55a3ff, #003d82)', icon: '🐔' },
+                'getting-over-it': { bg: 'linear-gradient(135deg, #fd79a8, #fdcb6e)', icon: '⛰️' },
+                'geometry-dash': { bg: 'linear-gradient(135deg, #00b894, #00cec9)', icon: '📐' },
+                'slope': { bg: 'linear-gradient(135deg, #e17055, #d63031)', icon: '📐' },
+                'run-3': { bg: 'linear-gradient(135deg, #6c5ce7, #2d3436)', icon: '🚀' },
+                'happy-wheels': { bg: 'linear-gradient(135deg, #fd79a8, #e84393)', icon: '🎡' },
+                'fireboy-watergirl': { bg: 'linear-gradient(135deg, #ff7675, #74b9ff)', icon: '🔥' },
+                'paper-io-2': { bg: 'linear-gradient(135deg, #a29bfe, #6c5ce7)', icon: '📄' },
+                'wordle': { bg: 'linear-gradient(135deg, #55a3ff, #2d3436)', icon: '📝' }
+            };
+
+            const gameStyle = gameStyles[game.id] || { bg: 'linear-gradient(135deg, #667eea, #764ba2)', icon: '🎮' };
+
+            card.innerHTML = `
+                <div class="game-image" style="background: ${gameStyle.bg};">
+                    ${badgeHtml}
+                    <div style="font-size: 48px; margin-bottom: 8px;">${gameStyle.icon}</div>
+                    <div style="font-size: 12px; font-weight: 600; opacity: 0.9;">${game.title}</div>
+                </div>
+                <div class="game-info">
+                    <div class="game-title">${game.title}</div>
+                    <div class="game-category">${game.category || 'Game'}</div>
+                    <div class="game-tags">
+                        ${(game.tags || []).slice(0, 2).map(tag => 
+                            `<span class="game-tag">${tag}</span>`
+                        ).join('')}
+                    </div>
+                </div>
+            `;
+            
+            card.onclick = () => openGame(game);
+            return card;
+        }
+
+        // 打开游戏
+        function openGame(game) {
+            const gameUrl = game.embedUrl || game.url;
+            if (!gameUrl) {
+                alert(t('gameNotAvailable'));
+                return;
+            }
+
+            // 添加到最近玩过的游戏
+            addToRecentlyPlayed(game);
+
+            document.getElementById('modalTitle').textContent = game.title;
+            const gameFrame = document.getElementById('gameFrame');
+            
+            // 显示加载状态
+            gameFrame.style.display = 'none';
+            const modalContent = document.querySelector('.modal-content');
+            const loadingDiv = document.createElement('div');
+            loadingDiv.id = 'gameLoading';
+            loadingDiv.style.cssText = `
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: calc(100% - 60px);
+                background: #f8f9fa;
+                color: #5f6368;
+            `;
+            loadingDiv.innerHTML = `
+                <div style="font-size: 48px; margin-bottom: 20px;">🎮</div>
+                <div style="font-size: 18px; margin-bottom: 10px;">${t('loadingGames')}...</div>
+                <div style="font-size: 14px; color: #9aa0a6;">${game.title}</div>
+            `;
+            modalContent.appendChild(loadingDiv);
+
+            // 设置游戏框架源
+            gameFrame.src = gameUrl;
+            
+            // 监听加载完成
+            gameFrame.onload = function() {
+                loadingDiv.remove();
+                gameFrame.style.display = 'block';
+            };
+            
+                         // 监听加载错误
+            gameFrame.onerror = function() {
+                showDemoGame(loadingDiv, game);
+            };
+            
+            // 检测是否无法在iframe中加载
+            setTimeout(() => {
+                try {
+                    if (gameFrame.contentDocument === null && gameFrame.contentWindow === null) {
+                        showDemoGame(loadingDiv, game);
+                    }
+                } catch (e) {
+                    showDemoGame(loadingDiv, game);
+                }
+            }, 3000);
+            
+            // 设置超时检测
+            setTimeout(() => {
+                if (document.getElementById('gameLoading')) {
+                    showDemoGame(loadingDiv, game);
+                }
+            }, 8000); // 8秒超时
+
+            document.getElementById('gameModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 添加到最近玩过的游戏
+        function addToRecentlyPlayed(game) {
+            recentlyPlayed = recentlyPlayed.filter(g => g.id !== game.id);
+            recentlyPlayed.unshift(game);
+            recentlyPlayed = recentlyPlayed.slice(0, 8);
+            localStorage.setItem('recentlyPlayed', JSON.stringify(recentlyPlayed));
+            updateRecentlyPlayed();
+        }
+
+        // 更新最近玩过的游戏显示
+        function updateRecentlyPlayed() {
+            const grid = document.getElementById('recentlyGames');
+            grid.innerHTML = '';
+            
+            if (recentlyPlayed.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #5f6368;">
+                        <div style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;">🎮</div>
+                        <div style="font-size: 16px; margin-bottom: 8px;">${t('startPlayingMessage')}</div>
+                    </div>
+                `;
+            } else {
+                recentlyPlayed.forEach((game, index) => {
+                    const gameCard = createGameCard(game, index);
+                    grid.appendChild(gameCard);
+                });
+            }
+        }
+
+        // 设置事件监听器
+        function setupEventListeners() {
+            // 导航项点击
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const section = this.dataset.section;
+                    const category = this.dataset.category;
+
+                    if (section) {
+                        showSection(section);
+                    } else if (category) {
+                        showCategory(category);
+                    }
+                });
+            });
+
+            // 搜索功能
+            const searchInput = document.getElementById('searchInput');
+            let searchTimeout;
+            
+            // 实时搜索
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    performSearch();
+                }, 300); // 300ms后执行搜索
+            });
+            
+            // 回车搜索
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    clearTimeout(searchTimeout);
+                    performSearch();
+                }
+            });
+
+            // 关闭模态框
+            document.querySelector('.close').addEventListener('click', closeGameModal);
+            
+            // ESC键关闭模态框
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && document.getElementById('gameModal').style.display === 'block') {
+                    closeGameModal();
+                }
+            });
+
+            // 点击外部关闭模态框
+            document.getElementById('gameModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeGameModal();
+                }
+            });
+        }
+
+        // 显示演示游戏
+        function showDemoGame(loadingDiv, game) {
+            const defaultDescription = `${t('featuredGames')} - ${game.category} ${t('games')}!`;
+            loadingDiv.innerHTML = `
+                <div style="text-align: center; padding: 40px;">
+                    <div style="font-size: 48px; margin-bottom: 20px;">🎮</div>
+                    <h3 style="color: #202124; margin-bottom: 15px;">${game.title}</h3>
+                    <p style="color: #5f6368; margin-bottom: 20px; line-height: 1.5;">
+                        ${game.description || defaultDescription}
+                    </p>
+                    <div style="background: #f8f9fa; border-radius: 12px; padding: 30px; margin-bottom: 20px;">
+                        <div style="font-size: 24px; margin-bottom: 15px;">🏆</div>
+                        <div style="color: #1a73e8; font-weight: 600; margin-bottom: 10px;">${t('gameFeatures')}</div>
+                        <div style="color: #5f6368; font-size: 14px;">
+                            • ${t('category')}: ${game.category}<br>
+                            • ${t('tags')}: ${game.tags ? game.tags.slice(0, 3).join(', ') : 'Action, Fun, Exciting'}<br>
+                            • ${t('gameId')}: ${game.id}
                         </div>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <button onclick="window.open('${game.embedUrl}', '_blank')" style="
+                            background: #34a853;
+                            color: white;
+                            border: none;
+                            padding: 12px 24px;
+                            border-radius: 20px;
+                            cursor: pointer;
+                            margin-right: 10px;
+                            font-weight: 600;
+                        ">${t('openInNewTab')}</button>
+                        <button onclick="closeGameModal()" style="
+                            background: #4285f4;
+                            color: white;
+                            border: none;
+                            padding: 12px 24px;
+                            border-radius: 20px;
+                            cursor: pointer;
+                            font-weight: 600;
+                        ">${t('close')}</button>
+                    </div>
+                    <div style="font-size: 12px; color: #9aa0a6;">
+                        ${t('frameLoadingNote')}
                     </div>
                 </div>
             `;
         }
 
-        // Shuffle array
-        function shuffleArray(array) {
-            const shuffled = [...array];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        // 关闭游戏模态框
+        function closeGameModal() {
+            document.getElementById('gameModal').style.display = 'none';
+            document.getElementById('gameFrame').src = '';
+            document.getElementById('gameFrame').style.display = 'block';
+            
+            // 清理加载状态
+            const loadingDiv = document.getElementById('gameLoading');
+            if (loadingDiv) {
+                loadingDiv.remove();
             }
-            return shuffled;
+            
+            document.body.style.overflow = 'auto';
         }
 
-        // Render games
-        function renderGames() {
-            // Featured games (random 6)
-            const shuffledGames = shuffleArray(games);
-            const featured = shuffledGames.slice(0, 6);
-            document.getElementById('featuredGames').innerHTML = featured.map(createGameCard).join('');
+        // 显示不同分区
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+            
+            switch(section) {
+                case 'home':
+                    document.getElementById('recently').style.display = 'block';
+                    document.getElementById('featured').style.display = 'block';
+                    break;
+                case 'recently':
+                    document.getElementById('recently').style.display = 'block';
+                    break;
+                case 'featured':
+                    document.getElementById('featured').style.display = 'block';
+                    break;
+                case 'new':
+                    showNewGames();
+                    break;
+                case 'trending':
+                    showTrendingGames();
+                    break;
+            }
+        }
 
-            // New games (last 6)
-            const newGames = games.slice(-6);
-            document.getElementById('newGames').innerHTML = newGames.map(createGameCard).join('');
-
-            // Recently played
-            const recentlyContainer = document.getElementById('recentlyGames');
-            if (recentlyPlayed.length > 0) {
-                recentlyContainer.innerHTML = recentlyPlayed.map(createGameCard).join('');
+        // 显示新游戏
+        function showNewGames() {
+            const newGames = allGames.filter(game => game.isNew);
+            const grid = document.getElementById('newGames');
+            grid.innerHTML = '';
+            
+            if (newGames.length === 0) {
+                // 如果没有标记为新的游戏，显示所有游戏
+                const statsDiv = document.createElement('div');
+                statsDiv.style.cssText = 'grid-column: 1 / -1; text-align: center; margin-bottom: 20px; color: #5f6368;';
+                statsDiv.innerHTML = `${t('showingLatest')} ${allGames.length} ${t('games')}`;
+                grid.appendChild(statsDiv);
+                
+                allGames.forEach((game, index) => {
+                    const gameCard = createGameCard(game, index);
+                    grid.appendChild(gameCard);
+                });
             } else {
-                recentlyContainer.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #6c757d; padding: 40px 0;">No recently played games</div>';
+                const statsDiv = document.createElement('div');
+                statsDiv.style.cssText = 'grid-column: 1 / -1; text-align: center; margin-bottom: 20px; color: #5f6368;';
+                statsDiv.innerHTML = `${newGames.length} ${t('newGamesAvailable')}`;
+                grid.appendChild(statsDiv);
+                
+                newGames.forEach((game, index) => {
+                    const gameCard = createGameCard(game, index);
+                    grid.appendChild(gameCard);
+                });
             }
+            
+            document.getElementById('new').style.display = 'block';
         }
 
-        // Play game
-        function playGame(url, title, gameId) {
-            // Add to recently played
-            const game = games.find(g => g.id === gameId);
-            if (game) {
-                recentlyPlayed = recentlyPlayed.filter(g => g.id !== gameId);
-                recentlyPlayed.unshift(game);
-                if (recentlyPlayed.length > 6) {
-                    recentlyPlayed = recentlyPlayed.slice(0, 6);
-                }
-                renderGames();
+        // 显示热门游戏
+        function showTrendingGames() {
+            const hotGames = allGames.filter(game => game.isHot);
+            const grid = document.getElementById('newGames'); // 复用newGames的grid
+            grid.innerHTML = '';
+            
+            // 修改分区标题
+            const sectionTitle = document.querySelector('#new .section-title');
+            sectionTitle.textContent = t('trendingNow');
+            
+            if (hotGames.length === 0) {
+                // 如果没有标记为热门的游戏，显示所有游戏
+                const statsDiv = document.createElement('div');
+                statsDiv.style.cssText = 'grid-column: 1 / -1; text-align: center; margin-bottom: 20px; color: #5f6368;';
+                statsDiv.innerHTML = `${allGames.length} ${t('trendingGamesSelected')}`;
+                grid.appendChild(statsDiv);
+                
+                allGames.forEach((game, index) => {
+                    const gameCard = createGameCard(game, index);
+                    grid.appendChild(gameCard);
+                });
+            } else {
+                const statsDiv = document.createElement('div');
+                statsDiv.style.cssText = 'grid-column: 1 / -1; text-align: center; margin-bottom: 20px; color: #5f6368;';
+                statsDiv.innerHTML = `${hotGames.length} ${t('hotGamesTrending')}`;
+                grid.appendChild(statsDiv);
+                
+                hotGames.forEach((game, index) => {
+                    const gameCard = createGameCard(game, index);
+                    grid.appendChild(gameCard);
+                });
             }
-
-            // Open game modal
-            const modal = document.getElementById('gameModal');
-            const frame = document.getElementById('gameFrame');
-            const modalTitle = document.getElementById('modalTitle');
             
-            modalTitle.textContent = title;
-            frame.src = url;
-            modal.style.display = 'block';
+            document.getElementById('new').style.display = 'block';
         }
 
-        // Close modal
-        function closeModal() {
-            const modal = document.getElementById('gameModal');
-            const frame = document.getElementById('gameFrame');
-            
-            modal.style.display = 'none';
-            frame.src = '';
-        }
 
-        // Category filtering
-        document.querySelectorAll('.category-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Update active state
-                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                
-                const category = this.dataset.category;
-                
-                // Filter games
-                let filteredGames = category === 'all' ? games : games.filter(game => game.category === category);
-                
-                // Update sections
-                const shuffledFiltered = shuffleArray(filteredGames);
-                document.getElementById('featuredGames').innerHTML = shuffledFiltered.slice(0, 6).map(createGameCard).join('');
-                document.getElementById('newGames').innerHTML = shuffledFiltered.slice(-6).map(createGameCard).join('');
+
+        // 搜索游戏
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            if (!searchTerm) {
+                displayFeaturedGames();
+                return;
+            }
+            
+            const searchResults = allGames.filter(game => 
+                game.title.toLowerCase().includes(searchTerm) ||
+                (game.description && game.description.toLowerCase().includes(searchTerm)) ||
+                (game.tags && game.tags.some(tag => tag.toLowerCase().includes(searchTerm)))
+            );
+            
+            const grid = document.getElementById('featuredGames');
+            grid.innerHTML = '';
+            
+            if (searchResults.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #5f6368;">
+                        <div style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;">🔍</div>
+                        <div style="font-size: 16px; margin-bottom: 8px;">No games found for "${searchTerm}"</div>
+                        <div style="font-size: 14px; opacity: 0.7;">Try searching with different keywords</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // 显示搜索结果统计
+            const statsDiv = document.createElement('div');
+            statsDiv.style.cssText = 'grid-column: 1 / -1; text-align: center; margin-bottom: 20px; color: #5f6368;';
+            statsDiv.innerHTML = `Found ${searchResults.length} games matching "${searchTerm}"`;
+            grid.appendChild(statsDiv);
+            
+            // 显示所有搜索结果
+            searchResults.forEach((game, index) => {
+                const gameCard = createGameCard(game, index);
+                grid.appendChild(gameCard);
             });
-        });
+            
+            // 隐藏其他分区，只显示Featured
+            document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+            document.getElementById('featured').style.display = 'block';
+        }
 
-        // Close modal when clicking outside
-        window.addEventListener('click', function(e) {
-            const modal = document.getElementById('gameModal');
-            if (e.target === modal) {
-                closeModal();
+        // 显示分类游戏
+        function showCategory(category) {
+            let filteredGames;
+            if (category === 'all') {
+                filteredGames = allGames;
+            } else {
+                filteredGames = allGames.filter(game => 
+                    game.tags && game.tags.some(tag => 
+                        tag.toLowerCase() === category.toLowerCase()
+                    )
+                );
             }
-        });
+            
+            const grid = document.getElementById('featuredGames');
+            grid.innerHTML = '';
+            
+            if (filteredGames.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #5f6368;">
+                        <div style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;">🎮</div>
+                        <div style="font-size: 16px; margin-bottom: 8px;">No ${category} games found</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // 显示分类统计
+            const statsDiv = document.createElement('div');
+            statsDiv.style.cssText = 'grid-column: 1 / -1; text-align: center; margin-bottom: 20px; color: #5f6368;';
+            statsDiv.innerHTML = `${filteredGames.length} ${category === 'all' ? 'total' : category} games available`;
+            grid.appendChild(statsDiv);
+            
+            // 显示所有筛选后的游戏
+            filteredGames.forEach((game, index) => {
+                const gameCard = createGameCard(game, index);
+                grid.appendChild(gameCard);
+            });
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', renderGames);
+            document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+            document.getElementById('featured').style.display = 'block';
+        }
+
+
     </script>
 </body>
 </html> 
